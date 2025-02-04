@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress_site
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: "${MYSQL_HOST}:${MYSQL_PORT}"
+      WORDPRESS_DB_USER: "${MYSQL_USER}"
+      WORDPRESS_DB_PASSWORD: "${MYSQL_PASSWORD}"
+      WORDPRESS_DB_NAME: "${MYSQL_DATABASE}"
+    volumes:
+      - wp_data:/var/www/html
+
+volumes:
+  wp_data:
